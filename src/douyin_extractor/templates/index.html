@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>抖音媒体提取</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, sans-serif; }
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #111827; }
+    main { width: min(520px, calc(100% - 40px)); padding: 30px; border-radius: 22px; background: #1f2937; box-shadow: 0 20px 60px #0006; }
+    h1 { margin-top: 0; } label { display: block; margin: 18px 0 7px; }
+    input, select, button { box-sizing: border-box; width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #4b5563; font: inherit; }
+    button { margin-top: 22px; border: 0; background: #22c55e; color: #052e16; font-weight: 700; cursor: pointer; }
+    small { color: #9ca3af; } .notice { color: #fbbf24; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>抖音媒体提取</h1>
+    <p><small>粘贴抖音官方分享链接，下载视频或转换为 MP3。</small></p>
+    <form method="post" action="/extract">
+      <label for="url">分享链接</label>
+      <input id="url" name="url" type="url" required maxlength="2048" placeholder="https://v.douyin.com/…">
+      <label for="media_type">输出格式</label>
+      <select id="media_type" name="media_type">
+        <option value="video">视频</option>
+        <option value="audio">MP3 音频</option>
+      </select>
+      {% if token_required %}
+      <label for="token">访问令牌</label>
+      <input id="token" name="token" type="password" required autocomplete="current-password">
+      {% endif %}
+      <button type="submit">开始提取</button>
+    </form>
+    <p class="notice"><small>请只下载你有权保存的内容，并遵守平台条款与当地法律。</small></p>
+  </main>
+</body>
+</html>

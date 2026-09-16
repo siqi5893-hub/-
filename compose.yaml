@@ -1,0 +1,19 @@
+services:
+  extractor:
+    build: .
+    network_mode: host
+    environment:
+      OUTPUT_DIR: /data/downloads
+      HOST: 127.0.0.1
+      PORT: 8080
+      APP_TOKEN: ${APP_TOKEN:?请在.env中设置APP_TOKEN}
+      DOUYIN_COOKIES: /run/secrets/douyin_cookies
+    volumes:
+      - ./downloads:/data/downloads
+    secrets:
+      - douyin_cookies
+    restart: unless-stopped
+
+secrets:
+  douyin_cookies:
+    file: ./cookies.txt
